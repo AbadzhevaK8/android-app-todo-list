@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ToDo List</string>
+    <string name="add_issue_button">Add issue button</string>
+    <string name="hint_enter_note_text">Enter note text</string>
+    <string name="radio_button_low">Low</string>
+    <string name="radio_button_medium">Medium</string>
+    <string name="radio_button_high">High</string>
+    <string name="button_save">Save</string>
+    <string name="toast_please_add_a_note">Please add a note.</string>
+</resources>
