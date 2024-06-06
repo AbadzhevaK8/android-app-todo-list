@@ -11,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,17 +37,9 @@ class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        viewModel = new MainViewModel(getApplication());
-        viewModel.getCount().observe(this, count -> Toast.makeText(
-                MainActivity.this,
-                String.valueOf(count),
-                Toast.LENGTH_SHORT
-        ).show());
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         initViews();
         notesAdapter = new NotesAdapter();
-        notesAdapter.setOnNoteClickListener(note -> {
-            viewModel.showCount();
-        });
         recyclerViewNotes.setAdapter(notesAdapter);
 
         viewModel
