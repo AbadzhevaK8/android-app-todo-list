@@ -43,6 +43,7 @@ public class AddNoteActivity extends AppCompatActivity {
         });
         initViews();
         buttonSave.setOnClickListener(v -> {
+            buttonSave.setEnabled(false);
             saveNote();
         });
     }
