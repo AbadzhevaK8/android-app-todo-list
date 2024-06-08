@@ -8,8 +8,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import java.util.concurrent.TimeUnit;
-
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -17,9 +15,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class AddNoteViewModel extends AndroidViewModel {
 
-    private NotesDao notesDao;
-    private MutableLiveData<Boolean> shouldCloseScreen = new MutableLiveData<>();
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final NotesDao notesDao;
+    private final MutableLiveData<Boolean> shouldCloseScreen = new MutableLiveData<>();
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public AddNoteViewModel(@NonNull Application application) {
         super(application);
@@ -32,13 +30,12 @@ public class AddNoteViewModel extends AndroidViewModel {
 
     public void saveNote(Note note) {
         Disposable disposable = notesDao.add(note)
-//                .delay(5, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
                     Log.d("AddNoteViewModel", "subscribe");
                     shouldCloseScreen.setValue(true);
-                });
+                }, throwable -> Log.d("AddNoteViewModel", "Error saveNote"));
         compositeDisposable.add(disposable);
     }
 

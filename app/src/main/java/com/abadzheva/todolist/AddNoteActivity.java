@@ -42,10 +42,7 @@ public class AddNoteActivity extends AppCompatActivity {
             }
         });
         initViews();
-        buttonSave.setOnClickListener(v -> {
-            buttonSave.setEnabled(false);
-            saveNote();
-        });
+        buttonSave.setOnClickListener(v -> saveNote());
     }
 
     private void initViews() {
